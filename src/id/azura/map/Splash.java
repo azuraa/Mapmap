@@ -1,54 +1,67 @@
 package id.azura.map;
 
 import id.azura.map.helper.ConnectionDetector;
+import id.azura.map.helper.JSONParser;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 public class Splash extends Activity {
 	ConnectionDetector cd;
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
-        cd = new ConnectionDetector(getApplicationContext());
-        
-        new grabAsTa().execute();
-    }
+	final String url = "http://192.168.43.4/api/pull.php";
+	JSONArray markers = null;
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.splash);
+		cd = new ConnectionDetector(getApplicationContext());
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-    
-    
-    class grabAsTa extends AsyncTask<Void, Integer, Boolean> {
-        ProgressDialog dialog = new ProgressDialog(Splash.this);
+		new grabAsTa().execute();
+	}
 
-        @Override
-        protected void onPreExecute() {
-            //or show splash here!
-            dialog.setMessage("Grabbing Markers!");
-            dialog.show();
-            super.onPreExecute();
-        }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
 
-        protected Boolean doInBackground(Void... values) {
-                //magician at work!
-                return true;
-             }
+	class grabAsTa extends AsyncTask<String, String, JSONObject> {
+		ProgressDialog dialog = new ProgressDialog(Splash.this);
+		Context cntxt = Splash.this;
 
+		@Override
+		protected void onPreExecute() {
+			// or show splash here!
+			dialog.setMessage("Grabbing Markers!");
+			dialog.show();
+			super.onPreExecute();
+		}
 
-            @Override
-            protected void onProgressUpdate(Integer... values) {
-                //insult user here
-            }
-    }
+		protected JSONObject doInBackground(String... arg) {
+			JSONParser jParser = new JSONParser();
+			JSONObject json = jParser.getJSONFromUrl(url);
+			Log.e("aa",""+json.toString());
+			return json;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject json) {
+			dialog.dismiss();
+			super.onPostExecute(json);
+			cntxt.startActivity(new Intent(cntxt, Map.class));
+		}
+
+	}
 
 }

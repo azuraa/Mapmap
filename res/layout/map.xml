@@ -13,23 +13,7 @@
             class="com.google.android.gms.maps.SupportMapFragment" />
     </FrameLayout>
 
-    <EditText
-        android:id="@+id/et_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <Button
-        android:id="@+id/btn_find"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="Button" />
+   
+ 
 
 </RelativeLayout>

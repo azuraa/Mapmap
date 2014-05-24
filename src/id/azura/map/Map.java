@@ -27,7 +27,7 @@ public class Map extends FragmentActivity {
 	GoogleMap googleMap;
 	MarkerOptions markerOptions;
 	LatLng latLng;
-	
+
 	JSONObject json;
 
 	@Override

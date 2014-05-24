@@ -38,7 +38,7 @@ public class Splash extends Activity {
 
 	class grabAsTa extends AsyncTask<String, String, JSONObject> {
 		ProgressDialog dialog = new ProgressDialog(Splash.this);
-		Context cntxt = Splash.this;
+		Context c = Splash.this;
 
 		@Override
 		protected void onPreExecute() {
@@ -51,7 +51,6 @@ public class Splash extends Activity {
 		protected JSONObject doInBackground(String... arg) {
 			JSONParser jParser = new JSONParser();
 			JSONObject json = jParser.getJSONFromUrl(url);
-			Log.e("aa",""+json.toString());
 			return json;
 		}
 
@@ -59,7 +58,11 @@ public class Splash extends Activity {
 		protected void onPostExecute(JSONObject json) {
 			dialog.dismiss();
 			super.onPostExecute(json);
-			cntxt.startActivity(new Intent(cntxt, Map.class));
+			Log.e("sd",""+json.toString());
+			Intent i = new Intent(c, Map.class);
+			i.putExtra("json", json.toString());
+			startActivity(i);
+
 		}
 
 	}

@@ -1,35 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Map" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <fragment
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/et_location"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10" >
 
-        <Button
-            android:id="@+id/btn_find"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="sth" />
+        <requestFocus />
+    </EditText>
 
-        <EditText
-            android:id="@+id/et_location"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btn_find"
-            android:hint="rrg"
-            android:inputType="text" />
-    </RelativeLayout>
+    <Button
+        android:id="@+id/btn_find"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Button" />
 
-    <fragment
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment" />
-
-</LinearLayout>
+</RelativeLayout>

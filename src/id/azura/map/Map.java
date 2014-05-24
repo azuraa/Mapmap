@@ -3,6 +3,9 @@ package id.azura.map;
 import java.io.IOException;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -24,11 +27,20 @@ public class Map extends FragmentActivity {
 	GoogleMap googleMap;
 	MarkerOptions markerOptions;
 	LatLng latLng;
+	
+	JSONObject json;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
+
+		try {
+			json = new JSONObject(getIntent().getStringExtra("json"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map);

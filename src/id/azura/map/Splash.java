@@ -17,7 +17,7 @@ import android.view.Menu;
 
 public class Splash extends Activity {
 	ConnectionDetector cd;
-	final String url = "http://192.168.43.4/api/pull.php";
+	final String url = "http://ktm-uir.com/api/pull.php";
 	JSONArray markers = null;
 
 	@Override
